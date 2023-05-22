@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Random Question Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+        }
+
+        h1 {
+            color: #333333;
+            margin-top: 50px;
+        }
+
+        p {
+            font-size: 20px;
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Random Question Generator</h1>
+    <p id="question"></p>
+
+    <h1>Timer</h1>
+    <p id="timer"></p>
+
+
+    <script>
+        // Array of questions
+        var questions = [
+            "What is your favorite color?",
+            "What is the capital of France?",
+            "Who is the current president of the United States?",
+            "What is the largest planet in our solar system?",
+            "What is the largest country in the world?",
+            "What is the largest ocean in the world?",
+            "What is the largest continent in the world?",
+            "What is the largest animal in the world?",
+            "What is the largest mammal in the world?",
+            "What is the largest bird in the world?",
+        ];
+
+        var PassedQuestions = [];
+
+        function displayRandomQuestion() {
+            // Get a random question from the array
+            var randomIndex = Math.floor(Math.random() * questions.length);
+
+            // Check if the question has already been displayed
+            if (PassedQuestions.includes(randomIndex)) {
+                // If it has been displayed, call the function again
+                displayRandomQuestion();
+                return;
+            }
+
+            // Add the question index to the array
+            PassedQuestions.push(randomIndex);
+
+            // Get the question based on the random index
+            var question = questions[randomIndex];
+
+            // Display the question on the page
+            var questionElement = document.getElementById("question");
+            questionElement.innerText = question;
+        }
+
+        var timerElement = document.getElementById("timer");
+        var seconds = 30;
+
+        function startTimer() {
+            if (seconds <= 0) {
+                seconds = 30;
+            }
+
+            timerElement.innerText = seconds + " sec";
+            seconds--;
+            var timerTimeout = setTimeout(startTimer, 1000);
+        }
+
+        startTimer();
+
+
+        // Initial question display
+        displayRandomQuestion();
+
+        // Change question every 10 seconds
+        setInterval(displayRandomQuestion, 10000);
+
+
+
+
+
+    </script>
+</body>
+
+</html>
